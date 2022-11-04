@@ -1,0 +1,5 @@
+Bat,Battery,24,p,n
+R1,Resistor,6,p,p124
+R2,Resistor,4,p124,p23
+R3,Resistor,8,p23,n
+R4,Resistor,12,p124,n

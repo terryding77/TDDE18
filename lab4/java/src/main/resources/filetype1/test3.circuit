@@ -1,0 +1,7 @@
+4,6
+Bat,Battery,24,0,1
+R1,Resistor,150,0,2
+R2,Resistor,50,0,3
+C3,Capacitor,1,2,3
+R4,Resistor,300,2,1
+C5,Capacitor,0.75,3,1
