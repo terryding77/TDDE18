@@ -1,13 +1,14 @@
 package TDDE18.lab4;
 
+import TDDE18.lab4.factory.NumberFactory;
 import TDDE18.lab4.model.*;
+import TDDE18.lab4.nubmer.DoubleNumber;
+import TDDE18.lab4.nubmer.Num;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @SuppressWarnings("DuplicatedCode")
 public class Main_Circuit {
-    public static void runTest1(int iterations, int prints, double timeStep, double batteryVoltage) {
+    public static void runTest1(int iterations, int prints, Num timeStep, Num batteryVoltage) {
         Connection p = new Connection();
         Connection n = new Connection();
         Connection p124 = new Connection();
@@ -24,7 +25,7 @@ public class Main_Circuit {
     }
 
 
-    public static void runTest2(int iterations, int prints, double timeStep, double batteryVoltage) {
+    public static void runTest2(int iterations, int prints, Num timeStep, Num batteryVoltage) {
         Connection p = new Connection();
         Connection n = new Connection();
         Connection l = new Connection();
@@ -41,7 +42,7 @@ public class Main_Circuit {
         circuit.deallocate();
     }
 
-    public static void runTest3(int iterations, int prints, double timeStep, double batteryVoltage) {
+    public static void runTest3(int iterations, int prints, Num timeStep, Num batteryVoltage) {
         Connection p = new Connection();
         Connection n = new Connection();
         Connection l = new Connection();
@@ -59,10 +60,11 @@ public class Main_Circuit {
     }
 
     public static void main(String[] args) {
+        NumberFactory.setup(DoubleNumber.class);
         int iterations = 200000;
         int prints = 10;
-        double timeStep = 0.01;
-        double batteryVoltage = 24;
+        Num timeStep = NumberFactory.getInstance().create(0.01);
+        Num batteryVoltage = NumberFactory.getInstance().create(24);
         runTest1(iterations, prints, timeStep, batteryVoltage);
         runTest2(iterations, prints, timeStep, batteryVoltage);
         runTest3(iterations, prints, timeStep, batteryVoltage);

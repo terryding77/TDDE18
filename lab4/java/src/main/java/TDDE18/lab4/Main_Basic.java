@@ -1,13 +1,16 @@
 package TDDE18.lab4;
 
+import TDDE18.lab4.factory.NumberFactory;
 import TDDE18.lab4.model.*;
+import TDDE18.lab4.nubmer.DoubleNumber;
+import TDDE18.lab4.nubmer.Num;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("DuplicatedCode")
 public class Main_Basic {
-    public static void runExample(int iterations, int prints, double timeStep, double batteryVoltage) {
+    public static void runExample(int iterations, int prints, Num timeStep, Num batteryVoltage) {
         Connection p = new Connection();
         Connection n = new Connection();
         List<Component> net = new ArrayList<>();
@@ -18,7 +21,7 @@ public class Main_Basic {
         deallocate_components(net);
     }
 
-    public static void runTest1(int iterations, int prints, double timeStep, double batteryVoltage) {
+    public static void runTest1(int iterations, int prints, Num timeStep, Num batteryVoltage) {
         Connection p = new Connection();
         Connection n = new Connection();
         Connection p124 = new Connection();
@@ -35,7 +38,7 @@ public class Main_Basic {
     }
 
 
-    public static void runTest2(int iterations, int prints, double timeStep, double batteryVoltage) {
+    public static void runTest2(int iterations, int prints, Num timeStep, Num batteryVoltage) {
         Connection p = new Connection();
         Connection n = new Connection();
         Connection l = new Connection();
@@ -52,7 +55,7 @@ public class Main_Basic {
         deallocate_components(net);
     }
 
-    public static void runTest3(int iterations, int prints, double timeStep, double batteryVoltage) {
+    public static void runTest3(int iterations, int prints, Num timeStep, Num batteryVoltage) {
         Connection p = new Connection();
         Connection n = new Connection();
         Connection l = new Connection();
@@ -69,7 +72,7 @@ public class Main_Basic {
         deallocate_components(net);
     }
 
-    private static void simulate(List<Component> net, int iterations, int prints, double timeStep) {
+    private static void simulate(List<Component> net, int iterations, int prints, Num timeStep) {
         int nextPrintRound = iterations / prints - 1;
         net.forEach(Component::printName);
         System.out.println();
@@ -92,12 +95,13 @@ public class Main_Basic {
     }
 
     public static void main(String[] args) {
-//        runExample(10000, 10, 0.1, 24.0);
+        NumberFactory.setup(DoubleNumber.class);
+        runExample(10000, 10, NumberFactory.getInstance().create(0.1), NumberFactory.getInstance().create(24.0));
 
         int iterations = 200000;
         int prints = 10;
-        double timeStep = 0.01;
-        double batteryVoltage = 24;
+        Num timeStep = NumberFactory.getInstance().create(0.01);
+        Num batteryVoltage = NumberFactory.getInstance().create(24);
         runTest1(iterations, prints, timeStep, batteryVoltage);
         runTest2(iterations, prints, timeStep, batteryVoltage);
         runTest3(iterations, prints, timeStep, batteryVoltage);

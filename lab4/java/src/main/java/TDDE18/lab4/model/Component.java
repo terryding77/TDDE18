@@ -1,5 +1,9 @@
 package TDDE18.lab4.model;
 
+
+import TDDE18.lab4.factory.NumberFactory;
+import TDDE18.lab4.nubmer.Num;
+
 public abstract class Component {
     String name;
     Connection begin, end;
@@ -19,22 +23,22 @@ public abstract class Component {
     }
 
     public void printValue() {
-        System.out.printf("%8.2f%8.2f", getVoltage(), getCurrent());
+        System.out.printf("%8.2f%8.2f", getVoltage().doubleValue(2), getCurrent().doubleValue(2));
     }
 
-    public void simulate(double timeStep) {
-        double deltaVoltage = calcDeltaVoltage(timeStep, begin.getVoltage(), end.getVoltage());
-        begin.changeVoltage(-deltaVoltage);
+    public void simulate(Num timeStep) {
+        Num deltaVoltage = calcDeltaVoltage(timeStep, begin.getVoltage(), end.getVoltage());
+        begin.changeVoltage(deltaVoltage.negate());
         end.changeVoltage(deltaVoltage);
     }
 
 
-    protected double getVoltage() {
-        return Math.abs(begin.getVoltage() - end.getVoltage());
+    protected Num getVoltage() {
+        return begin.getVoltage().subtract(end.getVoltage()).abs();
     }
 
 
-    abstract protected double getCurrent();
+    abstract protected Num getCurrent();
 
-    protected abstract double calcDeltaVoltage(double timeStep, double beginVoltage, double endVoltage);
+    protected abstract Num calcDeltaVoltage(Num timeStep, Num beginVoltage, Num endVoltage);
 }
